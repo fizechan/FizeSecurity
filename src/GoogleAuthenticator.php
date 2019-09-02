@@ -1,11 +1,13 @@
 <?php
-namespace fize\safe;
+
+namespace fize\security;
 
 use Exception;
 
 /**
  * 谷歌二次验证
- * @package fize\safe
+ * @notice 待移动到其他位置
+ * @package fize\security
  */
 class GoogleAuthenticator
 {
@@ -53,7 +55,7 @@ class GoogleAuthenticator
         $secretkey = $this->_base32Decode($secret);
 
         // Pack time into binary string
-        $time = chr(0).chr(0).chr(0).chr(0).pack('N*', $timeSlice);
+        $time = chr(0) . chr(0) . chr(0) . chr(0) . pack('N*', $timeSlice);
         // Hash it with users secret key
         $hm = hash_hmac('SHA1', $time, $secretkey, true);
         // Use last nipple of result as index/offset
@@ -82,16 +84,16 @@ class GoogleAuthenticator
      */
     public function getQRCodeGoogleUrl($name, $secret, $title = null, $params = array())
     {
-        $width = !empty($params['width']) && (int) $params['width'] > 0 ? (int) $params['width'] : 200;
-        $height = !empty($params['height']) && (int) $params['height'] > 0 ? (int) $params['height'] : 200;
+        $width = !empty($params['width']) && (int)$params['width'] > 0 ? (int)$params['width'] : 200;
+        $height = !empty($params['height']) && (int)$params['height'] > 0 ? (int)$params['height'] : 200;
         $level = !empty($params['level']) && array_search($params['level'], array('L', 'M', 'Q', 'H')) !== false ? $params['level'] : 'M';
 
-        $urlencoded = urlencode('otpauth://totp/'.$name.'?secret='.$secret.'');
+        $urlencoded = urlencode('otpauth://totp/' . $name . '?secret=' . $secret . '');
         if (isset($title)) {
-            $urlencoded .= urlencode('&issuer='.urlencode($title));
+            $urlencoded .= urlencode('&issuer=' . urlencode($title));
         }
 
-        return 'https://chart.googleapis.com/chart?chs='.$width.'x'.$height.'&chld='.$level.'|0&cht=qr&chl='.$urlencoded.'';
+        return 'https://chart.googleapis.com/chart?chs=' . $width . 'x' . $height . '&chld=' . $level . '|0&cht=qr&chl=' . $urlencoded . '';
     }
 
     /**

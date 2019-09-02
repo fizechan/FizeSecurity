@@ -1,14 +1,11 @@
 <?php
+
+namespace fize\security;
+
 /**
- * Created by PhpStorm.
- * User: cfz87
- * Date: 2018-04-28
- * Time: 16:03
+ * Class Csrf
+ * @package fize\security
  */
-
-namespace fize\safe;
-
-
 class Csrf
 {
     public function __construct()

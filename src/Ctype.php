@@ -1,9 +1,10 @@
 <?php
 
-namespace fize\safe;
+namespace fize\security;
 
 /**
  * 字符类型检测
+ * @package fize\security
  */
 class Ctype
 {

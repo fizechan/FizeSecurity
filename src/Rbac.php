@@ -1,9 +1,10 @@
 <?php
 
-namespace fize\safe;
+namespace fize\security;
 
 /**
  * 基于角色的数据库方式验证类
+ * @todo 待修改待转移
  */
 class Rbac
 {

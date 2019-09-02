@@ -1,6 +1,6 @@
 <?php
 
-namespace fize\safe;
+namespace fize\security;
 
 use Exception;
 
@@ -8,6 +8,7 @@ use Exception;
  *  OpenSSL扩展
  * 必须安装有效的 openssl.cnf 以保证此类正确运行
  * @todo pkcs7、pkey、spki、x509系列方法尚未测试
+ * @package fize\security
  */
 class OpenSSL
 {
@@ -65,18 +66,18 @@ class OpenSSL
      */
     public function __destruct()
     {
-        if(is_resource($this->publicKey)){
+        if (is_resource($this->publicKey)) {
             self::freeKey($this->publicKey);
         }
-        if(is_resource($this->privateKey)){
+        if (is_resource($this->privateKey)) {
             self::freeKey($this->privateKey);
         }
-        if($this->toPublicKeys) {
+        if ($this->toPublicKeys) {
             foreach ($this->toPublicKeys as $toPublicKey) {
                 self::freeKey($toPublicKey);
             }
         }
-        if(is_resource($this->pkey)) {
+        if (is_resource($this->pkey)) {
             $this->pkeyFree();
         }
     }
@@ -90,10 +91,10 @@ class OpenSSL
     public function setCsr($csr, $is_file = true)
     {
         if (!is_resource($csr)) {
-            if($is_file){
+            if ($is_file) {
                 $csr = file_get_contents($csr);
             }
-            if($csr === false){
+            if ($csr === false) {
                 return false;
             }
         }
@@ -127,14 +128,14 @@ class OpenSSL
      */
     public function setPublicKey($key, $is_file = true)
     {
-        if(is_resource($key)) {
+        if (is_resource($key)) {
             $res = $key;
         } else {
-            if($is_file){
+            if ($is_file) {
                 $key = file_get_contents($key);
             }
             $res = self::pkeyGetPublic($key);
-            if($res === false){
+            if ($res === false) {
                 return false;
             }
         }
@@ -151,14 +152,14 @@ class OpenSSL
      */
     public function setPrivateKey($key, $is_file = true, $passphrase = '')
     {
-        if(is_resource($key)) {
+        if (is_resource($key)) {
             $res = $key;
         } else {
-            if($is_file){
+            if ($is_file) {
                 $key = file_get_contents($key);
             }
             $res = self::pkeyGetPrivate($key, $passphrase);
-            if($res === false){
+            if ($res === false) {
                 return false;
             }
             $this->privateKeyInfo = [$key, $passphrase];
@@ -176,10 +177,10 @@ class OpenSSL
     public function setX509($x509, $is_file = true)
     {
         if (!is_resource($x509)) {
-            if($is_file){
+            if ($is_file) {
                 $x509 = file_get_contents($x509);
             }
-            if($x509 === false){
+            if ($x509 === false) {
                 return false;
             }
         }
@@ -196,7 +197,7 @@ class OpenSSL
     {
         $to_public_keys = [];
         foreach ($keys as $key) {
-            if(is_array($key)) {
+            if (is_array($key)) {
                 $certificate = $key['certificate'];
                 $from_private = isset($key['from_private']) ? $key['from_private'] : false;
                 $passphrase = isset($key['passphrase']) ? $key['passphrase'] : '';
@@ -245,7 +246,7 @@ class OpenSSL
 
     /**
      * 返回CSR的公钥
-     * @param bool $use_shortnames  是否使用短名称
+     * @param bool $use_shortnames 是否使用短名称
      * @return resource
      */
     public function csrGetPublicKey($use_shortnames = true)
@@ -297,20 +298,20 @@ class OpenSSL
      * @param string $aad 额外的认证数据
      * @return string 失败时返回false
      */
-    public function decrypt($data, $method, $options = 0, $iv = "", $tag = "",  $aad = "")
+    public function decrypt($data, $method, $options = 0, $iv = "", $tag = "", $aad = "")
     {
-        if(empty($iv)) {
+        if (empty($iv)) {
             $ivlen = self::cipherIvLength($method);
             $iv = self::randomPseudoBytes($ivlen);
         }
-        return openssl_decrypt($data, $method, $this->key, $options, $iv, $tag,  $aad);
+        return openssl_decrypt($data, $method, $this->key, $options, $iv, $tag, $aad);
     }
 
     /**
      * 计算远程DH密钥(公钥)和本地DH密钥的共享密钥
-     * @todo 待验证
      * @param resource $dh_key DH密钥
      * @return string
+     * @todo 待验证
      */
     public function dhComputeKey($dh_key)
     {
@@ -343,11 +344,11 @@ class OpenSSL
      */
     public function encrypt($data, $method, $options = 0, $iv = "", $is_aead = false, &$tag = null, $aad = "", $tag_length = 16)
     {
-        if(empty($iv)) {
+        if (empty($iv)) {
             $ivlen = self::cipherIvLength($method);
             $iv = self::randomPseudoBytes($ivlen);
         }
-        if($is_aead) {
+        if ($is_aead) {
             return openssl_encrypt($data, $method, $this->key, $options, $iv, $tag, $aad, $tag_length);
         }
         return openssl_encrypt($data, $method, $this->key, $options, $iv);
@@ -410,10 +411,10 @@ class OpenSSL
 
     /**
      * 获取私钥
-     * @deprecated openssl_pkey_get_private()的别名，不建议使用
      * @param mixed $key 格式字符串“file://path/to/file.pem”或者PEM格式的私钥
      * @param string $passphrase 如果指定的密钥已被加密了(受密码保护)，可选参数 passphrase 是必须要的
      * @return resource 失败返回false
+     * @deprecated openssl_pkey_get_private()的别名，不建议使用
      */
     public static function getPrivatekey($key, $passphrase = "")
     {
@@ -422,9 +423,9 @@ class OpenSSL
 
     /**
      * 从证书中解析公钥，以供使用
-     * @deprecated openssl_pkey_get_public()的别名，不建议使用
-     * @param mixed $certificate  X.509证书资源或者格式字符串“file://path/to/file.pem”或者PEM格式的公钥
+     * @param mixed $certificate X.509证书资源或者格式字符串“file://path/to/file.pem”或者PEM格式的公钥
      * @return resource
+     * @deprecated openssl_pkey_get_public()的别名，不建议使用
      */
     public static function getPublickey($certificate)
     {
@@ -468,7 +469,7 @@ class OpenSSL
      */
     public function pkcs12ExportToFile($filename, $pass, array $args = null)
     {
-        if($args) {
+        if ($args) {
             return openssl_pkcs12_export_to_file($this->x509, $filename, $this->privateKey, $pass, $args);
         } else {
             return openssl_pkcs12_export_to_file($this->x509, $filename, $this->privateKey, $pass);
@@ -484,7 +485,7 @@ class OpenSSL
      */
     public function pkcs12Export(&$out, $pass, array $args = null)
     {
-        if($args) {
+        if ($args) {
             return openssl_pkcs12_export($this->x509, $out, $this->privateKey, $pass, $args);
         } else {
             return openssl_pkcs12_export($this->x509, $out, $this->privateKey, $pass);
@@ -526,7 +527,7 @@ class OpenSSL
      */
     public function pkcs7Encrypt($infile, $outfile, array $headers, $recipcerts = null, $flags = 0, $cipherid = 0)
     {
-        if(is_null($recipcerts)) {
+        if (is_null($recipcerts)) {
             $recipcerts = $this->x509;
         }
         return openssl_pkcs7_encrypt($infile, $outfile, $recipcerts, $headers, $flags, $cipherid);
@@ -569,7 +570,7 @@ class OpenSSL
      */
     public function pkcs7Verify($filename, $flags, $outfilename = null, array $cainfo = null, $extracerts = null, $content = null)
     {
-        if(is_null($cainfo)) {
+        if (is_null($cainfo)) {
             $cainfo = $this->x509;
         }
         return openssl_pkcs7_verify($filename, $flags, $outfilename, $cainfo, $extracerts, $content);
@@ -629,14 +630,14 @@ class OpenSSL
 
     /**
      * 从证书中解析公钥，以供使用
-     * @param mixed $certificate  X.509证书资源或者格式字符串“file://path/to/file.pem”或者PEM格式的公钥
+     * @param mixed $certificate X.509证书资源或者格式字符串“file://path/to/file.pem”或者PEM格式的公钥
      * @param bool $from_private 指明$certificate是否为私钥
      * @param string $passphrase 如果指定的密钥已被加密了(受密码保护)，可选参数 passphrase 是必须要的
      * @return resource 失败返回false
      */
     public static function pkeyGetPublic($certificate, $from_private = false, $passphrase = "")
     {
-        if($from_private) {
+        if ($from_private) {
             $pkey = openssl_pkey_get_private($certificate, $passphrase);
             $details = openssl_pkey_get_details($pkey);
             return openssl_get_publickey($details['key']);
@@ -663,7 +664,7 @@ class OpenSSL
     public function privateDecrypt($data, $padding = 1)
     {
         $result = openssl_private_decrypt($data, $decrypted, $this->privateKey, $padding);
-        if(!$result) {
+        if (!$result) {
             throw new Exception(self::errorString());
         }
         return $decrypted;
@@ -679,7 +680,7 @@ class OpenSSL
     public function privateEncrypt($data, $padding = 1)
     {
         $result = openssl_private_encrypt($data, $crypted, $this->privateKey, $padding);
-        if(!$result) {
+        if (!$result) {
             throw new Exception(self::errorString());
         }
         return $crypted;
@@ -694,7 +695,7 @@ class OpenSSL
     public function publicDecrypt($data, $padding = 1)
     {
         $result = openssl_public_decrypt($data, $decrypted, $this->publicKey, $padding);
-        if(!$result) {
+        if (!$result) {
             throw new Exception(self::errorString());
         }
         return $decrypted;
@@ -710,7 +711,7 @@ class OpenSSL
     public function publicEncrypt($data, $padding = 1)
     {
         $result = openssl_public_encrypt($data, $crypted, $this->publicKey, $padding);
-        if(!$result) {
+        if (!$result) {
             throw new Exception(self::errorString());
         }
         return $crypted;
@@ -750,7 +751,7 @@ class OpenSSL
     public function sign($data, $signature_alg = 1)
     {
         $result = openssl_sign($data, $signature, $this->privateKey, $signature_alg);
-        if($result === false) {
+        if ($result === false) {
             throw new Exception(self::errorString());
         }
         return $signature;
@@ -807,7 +808,7 @@ class OpenSSL
     public function verify($data, $signature, $signature_alg = 1)
     {
         $result = openssl_verify($data, $signature, $this->publicKey, $signature_alg);
-        if($result === -1) {
+        if ($result === -1) {
             throw new Exception(self::errorString());
         }
         return $result ? true : false;

@@ -1,14 +1,11 @@
 <?php
+
+namespace fize\security;
+
 /**
- * Description of SSH2
- *
- * @author Fize Chan
- * @version V1.0.0.20170111
+ * Class Ssh2
+ * @package fize\security
  */
-
-namespace fize\safe;
-
-
 class Ssh2
 {
     //put your code here

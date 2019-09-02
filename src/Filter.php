@@ -1,9 +1,10 @@
 <?php
 
-namespace fize\safe;
+namespace fize\security;
 
 /**
  * 过滤器
+ * @package fize\security
  */
 class Filter
 {

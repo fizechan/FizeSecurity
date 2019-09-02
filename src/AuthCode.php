@@ -1,9 +1,10 @@
 <?php
 
-namespace fize\safe;
+namespace fize\security;
 
 /**
  *  Discuz!自定义的一个加解密算法
+ * @notice 非通用，待删除或转移到其他位置
  */
 class AuthCode
 {
@@ -17,16 +18,16 @@ class AuthCode
 
     /**
      * 加密、解密方法
-     * @example
-     *  $a = authcode('abc', 'ENCODE', 'key');
-     *  $b = authcode($a, 'DECODE', 'key');  // $b(abc)
-     *  $a = authcode('abc', 'ENCODE', 'key', 3600);
-     *  $b = authcode('abc', 'DECODE', 'key'); // 在一个小时内，$b(abc)，否则 $b 为空
      * @param string $string 原文或者密文
      * @param string $operation 操作(ENCODE | DECODE), 默认为 DECODE
      * @param string $key 密钥
      * @param int $expiry 密文有效期, 加密时候有效， 单位 秒，0 为永久有效
      * @return string 处理后的 原文或者 经过 base64_encode 处理后的密文
+     * @example
+     *  $a = authcode('abc', 'ENCODE', 'key');
+     *  $b = authcode($a, 'DECODE', 'key');  // $b(abc)
+     *  $a = authcode('abc', 'ENCODE', 'key', 3600);
+     *  $b = authcode('abc', 'DECODE', 'key'); // 在一个小时内，$b(abc)，否则 $b 为空
      */
     private static function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0)
     {

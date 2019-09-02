@@ -9,8 +9,10 @@
         }
     ],
     "require": {
-		"php": ">=7.0.0"
-	},
+		"php": ">=7.0.0",
+        "ext-ctype": "*",
+        "ext-openssl": "*"
+    },
 	"autoload": {
         "psr-4": {
             "fize\\security\\": "src"

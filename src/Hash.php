@@ -1,9 +1,10 @@
 <?php
 
-namespace fize\safe;
+namespace fize\security;
 
 /**
  * 哈希信息摘要操作类
+ * @package fize\security
  */
 class Hash
 {

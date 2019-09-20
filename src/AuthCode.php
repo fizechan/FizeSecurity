@@ -4,7 +4,7 @@ namespace fize\security;
 
 /**
  *  Discuz!自定义的一个加解密算法
- * @notice 非通用，待删除或转移到其他位置
+ * @todo 非通用，待删除或转移到其他位置
  */
 class AuthCode
 {

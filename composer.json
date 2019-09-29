@@ -1,6 +1,6 @@
 {
     "name": "fize/security",
-    "description": "safety protection correlation, produced by FizeChan.",
+    "description": "safety protection correlation.",
     "license": "Apache-2.0",
     "authors": [
         {
@@ -9,10 +9,7 @@
         }
     ],
     "require": {
-		"php": ">=7.0.0",
-        "ext-ctype": "*",
-        "ext-openssl": "*",
-        "ext-mbstring": "*"
+		"php": ">=7.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0.0",

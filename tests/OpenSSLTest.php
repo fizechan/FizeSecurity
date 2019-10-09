@@ -513,6 +513,11 @@ class OpenSSLTest extends TestCase
         $key = base64_decode($key64, true);
         $iv = base64_decode($iv64, true);
 
+        var_dump($key64);
+        var_dump($iv64);
+        var_dump($key);
+        var_dump($iv);
+
         $openssl = new OpenSSL();
         $openssl->setKey($key);
         $encode = $openssl->encrypt('测试', 'aes-256-cbc', 0, $iv);
@@ -520,6 +525,14 @@ class OpenSSLTest extends TestCase
 
         $decode = $openssl->decrypt($encode, 'aes-256-cbc', 0, $iv);
         echo $decode . '\r\n<br/>';
+
+        self::assertEquals($decode, '测试');
+
+        $openssl2 = new OpenSSL();
+        $openssl2->setKey('123456');
+        $encode2 = $openssl2->encrypt('测试', 'aes-256-cbc', 0, $iv);
+        $decode2 = $openssl2->decrypt($encode2, 'aes-256-cbc', 0, $iv);
+        self::assertEquals($decode2, '测试');
     }
 
     public function testDhComputeKey()

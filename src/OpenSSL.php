@@ -301,10 +301,10 @@ class OpenSSL
      */
     public function decrypt($data, $method, $options = 0, $iv = "", $tag = "", $aad = "")
     {
-        if (empty($iv)) {
-            $ivlen = self::cipherIvLength($method);
-            $iv = self::randomPseudoBytes($ivlen);
-        }
+//        if (empty($iv)) {
+//            $ivlen = self::cipherIvLength($method);
+//            $iv = self::randomPseudoBytes($ivlen);
+//        }
         return openssl_decrypt($data, $method, $this->key, $options, $iv, $tag, $aad);
     }
 
@@ -345,10 +345,10 @@ class OpenSSL
      */
     public function encrypt($data, $method, $options = 0, $iv = "", $is_aead = false, &$tag = null, $aad = "", $tag_length = 16)
     {
-        if (empty($iv)) {
-            $ivlen = self::cipherIvLength($method);
-            $iv = self::randomPseudoBytes($ivlen);
-        }
+//        if (empty($iv)) {
+//            $ivlen = self::cipherIvLength($method);
+//            $iv = self::randomPseudoBytes($ivlen);
+//        }
         if ($is_aead) {
             return openssl_encrypt($data, $method, $this->key, $options, $iv, $tag, $aad, $tag_length);
         }

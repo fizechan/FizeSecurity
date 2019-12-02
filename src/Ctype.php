@@ -4,7 +4,6 @@ namespace fize\security;
 
 /**
  * 字符类型检测
- * @package fize\security
  */
 class Ctype
 {
@@ -17,7 +16,7 @@ class Ctype
     }
 
     /**
-     * 做字母和数字字符检测，判断是否全部为字母和(或)数字字符。
+     * 判断是否全部为字母和(或)数字字符。
      * @param string $text 待判断字符串
      * @return bool
      */
@@ -37,7 +36,9 @@ class Ctype
     }
 
     /**
-     * 检查提供的 string 和 text 里面的字符是不是都是控制字符。 控制字符就是例如：换行、缩进、空格。
+     * 判断是不是都是控制字符。
+     *
+     * 控制字符就是例如：换行、缩进、空格。
      * @param string $text 待判断字符串
      * @return bool
      */
@@ -47,7 +48,9 @@ class Ctype
     }
 
     /**
-     * 判断提供的字符串是不是纯数字，注意传入的必须是string类型，传入int会导致判断错误
+     * 判断提供的字符串是不是纯数字。
+     *
+     * 注意传入的必须是 string 类型，传入 int 会导致判断错误。
      * @param string $text 待判断字符串
      * @return bool
      */
@@ -81,7 +84,7 @@ class Ctype
      * @param string $text 待判断字符串
      * @return bool
      */
-    public static function canPrint($text)
+    public static function print($text)
     {
         return ctype_print($text);
     }

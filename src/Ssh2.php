@@ -3,10 +3,9 @@
 namespace fize\security;
 
 /**
- * Class Ssh2
- * @package fize\security
+ * Secure Shell2
+ * @todo SSH2 不是核心或者默认扩展，暂不实现。
  */
 class Ssh2
 {
-    //put your code here
 }

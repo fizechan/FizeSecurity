@@ -14,8 +14,7 @@ class Validate
 {
 
     /**
-     * 内置正则验证规则
-     * @var array
+     * @var array 内置正则验证规则
      */
     protected static $regex = [
         'alphaDash'   => '/^[A-Za-z0-9\-\_]+$/',
@@ -43,15 +42,15 @@ class Validate
     }
 
     /**
-     * filter验证
+     * filter 验证
      * @param mixed $value 值
-     * @param int $filter 验证器ID
+     * @param int $filter 验证器 ID
      * @param mixed $options 其他参数
      * @return bool
      */
     public static function filter($value, $filter, $options = null)
     {
-        return Filter::varVar($value, $filter, $options) !== false;
+        return Filter::var($value, $filter, $options) !== false;
     }
 
     /**
@@ -85,7 +84,7 @@ class Validate
      */
     public static function isInteger($value)
     {
-        return Filter::varVar($value, FILTER_VALIDATE_INT) !== false;
+        return Filter::var($value, FILTER_VALIDATE_INT) !== false;
     }
 
     /**
@@ -95,7 +94,7 @@ class Validate
      */
     public static function isFloat($value)
     {
-        return Filter::varVar($value, FILTER_VALIDATE_FLOAT) !== false;
+        return Filter::var($value, FILTER_VALIDATE_FLOAT) !== false;
     }
 
     /**
@@ -105,17 +104,17 @@ class Validate
      */
     public static function isBoolean($value)
     {
-        return Filter::varVar($value, FILTER_VALIDATE_BOOLEAN) !== false;
+        return Filter::var($value, FILTER_VALIDATE_BOOLEAN) !== false;
     }
 
     /**
-     * 是否为email地址
+     * 是否为 email 地址
      * @param mixed $value 值
      * @return bool
      */
     public static function isEmail($value)
     {
-        return Filter::varVar($value, FILTER_VALIDATE_EMAIL) !== false;
+        return Filter::var($value, FILTER_VALIDATE_EMAIL) !== false;
     }
 
     /**
@@ -167,7 +166,7 @@ class Validate
     }
 
     /**
-     * 是否为字母和数字，下划线_及破折号-
+     * 是否为字母和数字，下划线_及破折号 -
      * @param mixed $value 值
      * @return bool
      */
@@ -207,7 +206,7 @@ class Validate
     }
 
     /**
-     * 只能是汉字、字母、数字和下划线_及破折号-
+     * 只能是汉字、字母、数字和下划线 _ 及破折号 -
      * @param mixed $value 值
      * @return bool
      */
@@ -241,9 +240,9 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function canPrint($value)
+    public static function isPrint($value)
     {
-        return Ctype::canPrint($value);
+        return Ctype::print($value);
     }
 
     /**
@@ -287,7 +286,7 @@ class Validate
     }
 
     /**
-     * 是否为有效的域名或者IP
+     * 是否为有效的域名或者 IP
      * @param mixed $value 值
      * @param string $rule 解析记录类型
      * @return bool
@@ -301,23 +300,23 @@ class Validate
     }
 
     /**
-     * 是否为有效的URL地址
+     * 是否为有效的 URL 地址
      * @param mixed $value 值
      * @return bool
      */
     public static function isUrl($value)
     {
-        return Filter::varVar($value, FILTER_VALIDATE_URL) !== false;
+        return Filter::var($value, FILTER_VALIDATE_URL) !== false;
     }
 
     /**
-     * 是否为有效的IP地址，支持验证ipv4和ipv6格式的IP地址。
+     * 是否为有效的 IP 地址，支持验证 ipv4 和 ipv6 格式的IP地址。
      * @param mixed $value 值
      * @return bool
      */
     public static function isIp($value)
     {
-        return Filter::varVar($value, FILTER_VALIDATE_IP) !== false;
+        return Filter::var($value, FILTER_VALIDATE_IP) !== false;
     }
 
     /**
@@ -341,13 +340,13 @@ class Validate
     }
 
     /**
-     * 是否为有效的MAC地址
+     * 是否为有效的 MAC 地址
      * @param mixed $value 值
      * @return bool
      */
     public static function isMacAddr($value)
     {
-        return Filter::varVar($value, FILTER_VALIDATE_MAC) !== false;
+        return Filter::var($value, FILTER_VALIDATE_MAC) !== false;
     }
 
     /**
@@ -412,7 +411,7 @@ class Validate
      * 验证数据长度
      * @param mixed $value 值
      * @param mixed $min 最小长度
-     * @param mixed $max 最大长度，如果未设定该参数，则表示长度=$min
+     * @param mixed $max 最大长度，如果未设定该参数，则表示长度 = $min
      * @return bool
      */
     public static function length($value, $min, $max = null)
@@ -496,11 +495,12 @@ class Validate
     }
 
     /**
-     * IP是否属于指定网段
-     * 网段参数支持如下格式
-     * 单个IP:192.168.5.1
-     * 带*号通配符IP格式：192.*.*.1
-     * IP段组：192.168.5.1-192.168.10.101
+     * IP 是否属于指定网段
+     *
+     * 网段参数支持如下格式：
+     *   - 单个 IP : 192.168.5.1
+     *   - 带 * 号通配符 IP 格式：192.*.*.1
+     *   - IP 段组：192.168.5.1 - 192.168.10.101
      * @param string $ip
      * @param array $networks 网段数组
      * @return bool
@@ -697,7 +697,7 @@ class Validate
     /**
      * 判断图像类型
      * @param string $image 图片文件路径
-     * @return int 失败时返回false
+     * @return int 失败时返回 false
      */
     protected static function getImageType($image)
     {

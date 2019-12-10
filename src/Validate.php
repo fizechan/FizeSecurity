@@ -8,7 +8,7 @@ use SplFileObject;
 use Exception;
 
 /**
- * 验证器
+ * 验证
  */
 class Validate
 {
@@ -59,12 +59,52 @@ class Validate
      * @param array $sets 数组
      * @return bool
      */
-    public static function isRequire($name, array $sets)
+    public static function isset($name, array $sets)
     {
-        if (isset($sets[$name]) && $sets[$name]) {
+        if (isset($sets[$name])) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 是否为空
+     * @param mixed $value 值
+     * @return bool
+     */
+    public static function empty($value)
+    {
+        return empty($value);
+    }
+
+    /**
+     * 是否不为空
+     * @param mixed $value 值
+     * @return bool
+     */
+    public static function notEmpty($value)
+    {
+        return !self::empty($value);
+    }
+
+    /**
+     * 是否为 null
+     * @param mixed $value 值
+     * @return bool
+     */
+    public static function null($value)
+    {
+        return is_null($value);
+    }
+
+    /**
+     * 是否不为 null
+     * @param mixed $value 值
+     * @return bool
+     */
+    public static function notNull($value)
+    {
+        return !self::null($value);
     }
 
     /**
@@ -72,7 +112,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isNumber($value)
+    public static function number($value)
     {
         return Ctype::digit((string)$value);
     }
@@ -82,7 +122,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isInteger($value)
+    public static function int($value)
     {
         return Filter::var($value, FILTER_VALIDATE_INT) !== false;
     }
@@ -92,7 +132,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isFloat($value)
+    public static function float($value)
     {
         return Filter::var($value, FILTER_VALIDATE_FLOAT) !== false;
     }
@@ -102,7 +142,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isBoolean($value)
+    public static function bool($value)
     {
         return Filter::var($value, FILTER_VALIDATE_BOOLEAN) !== false;
     }
@@ -112,7 +152,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isEmail($value)
+    public static function email($value)
     {
         return Filter::var($value, FILTER_VALIDATE_EMAIL) !== false;
     }
@@ -122,7 +162,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isArray($value)
+    public static function array($value)
     {
         return is_array($value);
     }
@@ -133,7 +173,7 @@ class Validate
      * @param string $format 指定格式化
      * @return bool
      */
-    public static function isDate($value, $format = null)
+    public static function date($value, $format = null)
     {
         $time = strtotime($value);
         if (!$time) {
@@ -150,7 +190,7 @@ class Validate
      * @param $value
      * @return bool
      */
-    public static function isAlpha($value)
+    public static function alpha($value)
     {
         return Ctype::alpha($value);
     }
@@ -160,7 +200,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isAlphaNum($value)
+    public static function alphaNum($value)
     {
         return Ctype::alnum($value);
     }
@@ -170,7 +210,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isAlphaDash($value)
+    public static function alphaDash($value)
     {
         return self::regex($value, self::$regex['alphaDash']);
     }
@@ -180,7 +220,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isChs($value)
+    public static function chs($value)
     {
         return self::regex($value, self::$regex['chs']);
     }
@@ -190,7 +230,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isChsAlpha($value)
+    public static function chsAlpha($value)
     {
         return self::regex($value, self::$regex['chsAlpha']);
     }
@@ -200,7 +240,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isChsAlphaNum($value)
+    public static function chsAlphaNum($value)
     {
         return self::regex($value, self::$regex['chsAlphaNum']);
     }
@@ -210,7 +250,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isChsDash($value)
+    public static function chsDash($value)
     {
         return self::regex($value, self::$regex['chsDash']);
     }
@@ -220,7 +260,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isCntrl($value)
+    public static function cntrl($value)
     {
         return Ctype::cntrl($value);
     }
@@ -230,7 +270,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isGraph($value)
+    public static function graph($value)
     {
         return Ctype::graph($value);
     }
@@ -240,7 +280,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isPrint($value)
+    public static function print($value)
     {
         return Ctype::print($value);
     }
@@ -250,7 +290,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isLower($value)
+    public static function lower($value)
     {
         return Ctype::lower($value);
     }
@@ -260,7 +300,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isUpper($value)
+    public static function upper($value)
     {
         return Ctype::upper($value);
     }
@@ -270,7 +310,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isSpace($value)
+    public static function space($value)
     {
         return Ctype::space($value);
     }
@@ -280,7 +320,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isXdigit($value)
+    public static function xdigit($value)
     {
         return Ctype::xdigit($value);
     }
@@ -291,7 +331,7 @@ class Validate
      * @param string $rule 解析记录类型
      * @return bool
      */
-    public static function isActiveUrl($value, $rule = 'MX')
+    public static function dnsrr($value, $rule = 'MX')
     {
         if (!in_array($rule, ['A', 'MX', 'NS', 'SOA', 'PTR', 'CNAME', 'AAAA', 'A6', 'SRV', 'NAPTR', 'TXT', 'ANY'])) {
             $rule = 'MX';
@@ -304,7 +344,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isUrl($value)
+    public static function url($value)
     {
         return Filter::var($value, FILTER_VALIDATE_URL) !== false;
     }
@@ -314,7 +354,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isIp($value)
+    public static function ip($value)
     {
         return Filter::var($value, FILTER_VALIDATE_IP) !== false;
     }
@@ -324,7 +364,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isMobile($value)
+    public static function mobile($value)
     {
         return self::regex($value, self::$regex['mobile']);
     }
@@ -334,7 +374,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isIdCard($value)
+    public static function idCard($value)
     {
         return self::regex($value, self::$regex['idCard']);
     }
@@ -344,7 +384,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isMacAddr($value)
+    public static function macAddr($value)
     {
         return Filter::var($value, FILTER_VALIDATE_MAC) !== false;
     }
@@ -354,7 +394,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isZip($value)
+    public static function zip($value)
     {
         return self::regex($value, self::$regex['zip']);
     }
@@ -365,7 +405,7 @@ class Validate
      * @param array $sets 数组
      * @return bool
      */
-    public static function isIn($value, array $sets)
+    public static function in($value, array $sets)
     {
         return in_array($value, $sets);
     }
@@ -378,7 +418,7 @@ class Validate
      */
     public static function notIn($value, array $sets)
     {
-        $result = self::isIn($value, $sets);
+        $result = self::in($value, $sets);
         return !$result;
     }
 
@@ -410,8 +450,8 @@ class Validate
     /**
      * 验证数据长度
      * @param mixed $value 值
-     * @param mixed $min 最小长度
-     * @param mixed $max 最大长度，如果未设定该参数，则表示长度 = $min
+     * @param int $min 最小长度
+     * @param int $max 最大长度，如果未设定该参数，则表示长度 = $min
      * @return bool
      */
     public static function length($value, $min, $max = null)
@@ -538,7 +578,7 @@ class Validate
                 $ip_begin = ip2long($tmp[0]);
                 $ip_end = ip2long($tmp[1]);
 
-                if($ip_now >= $ip_begin && $ip_now <= $ip_end) {
+                if ($ip_now >= $ip_begin && $ip_now <= $ip_end) {
                     return true;
                 }
             }
@@ -551,22 +591,24 @@ class Validate
     /**
      * 判断值是否和指定数组指定键名的值相同
      * @param mixed $value 值
-     * @param array $array 指定数组
      * @param string $name 指定键名
+     * @param array $array 指定数组
      * @return bool
      */
-    public static function confirm($value, array $array, $name) {
+    public static function confirm($value, $name, array $array)
+    {
         return $value == $array[$name];
     }
 
     /**
      * 判断值是否和指定数组指定键名的值不相同
      * @param mixed $value 值
-     * @param array $array 指定数组
      * @param string $name 指定键名
+     * @param array $array 指定数组
      * @return bool
      */
-    public static function different($value, array $array, $name) {
+    public static function different($value, $name, array $array)
+    {
         return $value != $array[$name];
     }
 
@@ -689,7 +731,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isFile($value)
+    public static function file($value)
     {
         return $value instanceof SplFileObject;
     }
@@ -718,7 +760,7 @@ class Validate
      * @param mixed $value 值
      * @return bool
      */
-    public static function isImage($value)
+    public static function image($value)
     {
         return $value instanceof SplFileObject && in_array(self::getImageType($value->getRealPath()), [1, 2, 3, 6]);
     }

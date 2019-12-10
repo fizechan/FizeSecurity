@@ -26,7 +26,7 @@ class Csrf
      * 取得表单 TOKEN
      * @return string
      */
-    public function token()
+    public static function token()
     {
         $token = md5($_SERVER['REQUEST_TIME_FLOAT']);
         $_SESSION[self::$name] = $token;
@@ -38,7 +38,7 @@ class Csrf
      * @param string $token 待验证 TOKEN
      * @return bool
      */
-    public function check($token)
+    public static function check($token)
     {
         if (!isset($_SESSION[self::$name])) {
             return false;

@@ -52,6 +52,11 @@ class Validator
     protected $errors = [];
 
     /**
+     * @var array 待验证数据
+     */
+    protected $data = [];
+
+    /**
      * @var array 场景规则重定义
      */
     protected $sceneRules = [];
@@ -65,6 +70,11 @@ class Validator
      * @var array 场景信息重定义
      */
     protected $sceneMessages = [];
+
+    /**
+     * @var array 场景待验证数据重定义
+     */
+    protected $sceneDatas = [];
 
     /**
      * 构造
@@ -212,6 +222,17 @@ class Validator
     }
 
     /**
+     * 设置待验证数据
+     *
+     * 该方法不会覆盖由 sceneDatas 方法定义的数据
+     * @param array $data 待验证数据
+     */
+    public function data(array $data)
+    {
+        $this->data = $data;
+    }
+
+    /**
      * 设置场景规则重定义
      * @param string $scene 场景
      * @param array $rules 规则
@@ -242,14 +263,31 @@ class Validator
     }
 
     /**
+     * 设置场景待验证数据重定义
+     * @param string $scene 场景
+     * @param array $data 待验证数据
+     */
+    public function sceneDatas($scene, array $data)
+    {
+        $this->sceneDatas[$scene] = $data;
+    }
+
+    /**
      * 验证数据
      *
      * 如果启用批量验证，则失败时返回值为错误数组，否则为错误信息
      * @param array $data 待验证数据
      * @return bool|string|array 成功返回 true，失败返回失败信息
      */
-    public function check(array $data)
+    public function check(array $data = null)
     {
+        if(is_null($data)) {
+            if ($this->scene && isset($this->sceneDatas[$this->scene])) {
+                $data = $this->sceneDatas[$this->scene];
+            } else {
+                $data = $this->data;
+            }
+        }
         $check = true;
         foreach (array_keys($data) as $field) {
             $check = $check && $this->checkField($field, $data);
@@ -261,18 +299,6 @@ class Validator
             return $this->errors;
         }
         return true;
-    }
-
-    protected function mergeRules($rule1s, $rule2s)
-    {
-        $rules = $rule1s;
-        foreach ($rule2s as $key => $value) {
-            if (is_int($key)) {
-                if (!in_array($value, $rules)) {
-                    $rules[] = $value;
-                }
-            }
-        }
     }
 
     /**

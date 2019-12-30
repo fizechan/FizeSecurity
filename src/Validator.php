@@ -312,7 +312,7 @@ class Validator
         $rules = $this->rules;
 
         if ($this->scene && isset($this->sceneRules[$this->scene])) {
-            $rules = $this->sceneRules[$this->scene];
+            $rules = array_merge($rules, $this->sceneRules[$this->scene]);
         }
 
         if ($this->scene && isset($this->scenes[$this->scene])) {

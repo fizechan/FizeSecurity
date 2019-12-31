@@ -288,11 +288,17 @@ class Validator
                 $data = $this->data;
             }
         }
+        $rules = $this->getFinalRules();
+        if(!$rules) {
+            return true;
+        }
         $check = true;
         foreach (array_keys($data) as $field) {
-            $check = $check && $this->checkField($field, $data);
-            if (!$check && $this->batch == false) {
-                return $this->errors[0];
+            if(isset($rules[$field])) {
+                $check = $check && $this->checkField($field, $rules[$field], $data);
+                if (!$check && $this->batch == false) {
+                    return $this->errors[0];
+                }
             }
         }
         if (!$check) {
@@ -302,12 +308,10 @@ class Validator
     }
 
     /**
-     * 验证单个字段规则
-     * @param string $field 字段名
-     * @param array $data 数据
-     * @return bool 成功返回 true，失败返回 false
+     * 取得最后实际使用的规则
+     * @return array
      */
-    protected function checkField($field, array $data)
+    protected function getFinalRules()
     {
         $rules = $this->rules;
 
@@ -322,10 +326,18 @@ class Validator
                 }
             }
         }
+        return $rules;
+    }
 
-        if (!isset($rules[$field])) {  //无需验证
-            return true;
-        }
+    /**
+     * 验证单个字段规则
+     * @param string $field 字段名
+     * @param array $rules 规则
+     * @param array $data 数据
+     * @return bool 成功返回 true，失败返回 false
+     */
+    protected function checkField($field, array $rules, array $data)
+    {
         $rules = $rules[$field];
         if (!is_array($rules)) {  //单个条件的简易写法
             $rules = [$rules];

@@ -338,7 +338,6 @@ class Validator
      */
     protected function checkField($field, array $rules, array $data)
     {
-        $rules = $rules[$field];
         if (!is_array($rules)) {  //单个条件的简易写法
             $rules = [$rules];
         }

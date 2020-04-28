@@ -1,26 +1,31 @@
 {
-    "name": "fize/security",
-    "description": "安全相关类库，为WEB安全保驾护航！",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "FizeChan",
-            "email": "chenfengzhan@qq.com"
-        }
-    ],
-    "require": {
-		"php": ">=7.0.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.0.0",
-        "fize/crypt": "*@dev"
-    },
-    "suggest": {
-        "ext-openssl": "*"
-    },
-	"autoload": {
-        "psr-4": {
-            "fize\\security\\": "src"
-        }
+  "name": "fize/security",
+  "description": "安全相关类库，为WEB安全保驾护航！",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "FizeChan",
+      "email": "chenfengzhan@qq.com"
     }
+  ],
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "require-dev": {
+    "ext-exif": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*",
+    "phpunit/phpunit": "~9.1.0",
+    "fize/crypt": "~3.2.0"
+  },
+  "suggest": {
+    "ext-exif": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "fize\\security\\": "src"
+    }
+  }
 }

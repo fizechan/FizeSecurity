@@ -20,7 +20,7 @@ class Filter
      *
      * 参数 `$type` :
      *   INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV 值其中一个
-     * @param int $type 类型
+     * @param int    $type          类型
      * @param string $variable_name 参数名
      * @return bool
      */
@@ -44,9 +44,9 @@ class Filter
      *
      * 参数 `$type` :
      *   INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV 值其中一个
-     * @param int $type 类型
+     * @param int   $type       类型
      * @param mixed $definition 定义过滤器参数
-     * @param bool $add_empty 在返回值中添加 NULL 作为不存在的键。
+     * @param bool  $add_empty  在返回值中添加 NULL 作为不存在的键。
      * @return mixed
      */
     public static function inputArray($type, $definition, $add_empty = true)
@@ -59,10 +59,10 @@ class Filter
      *
      * 参数 `$type` :
      *   INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV 值其中一个
-     * @param int $type 类型
+     * @param int    $type          类型
      * @param string $variable_name 待获取的变量名
-     * @param int $filter 指定过滤器
-     * @param mixed $options 指定过滤器参数
+     * @param int    $filter        指定过滤器
+     * @param mixed  $options       指定过滤器参数
      * @return mixed
      */
     public static function input($type, $variable_name, $filter = 516, $options = null)
@@ -81,9 +81,9 @@ class Filter
 
     /**
      * 获取多个变量并且过滤它们
-     * @param array $data 一个键为字符串，值为待过滤的数据的数组
+     * @param array $data       一个键为字符串，值为待过滤的数据的数组
      * @param mixed $definition 一个定义参数的数组
-     * @param bool $add_empty 在返回值中添加 NULL 作为不存在的键
+     * @param bool  $add_empty  在返回值中添加 NULL 作为不存在的键
      * @return mixed
      */
     public static function varArray($data, $definition, $add_empty = true)
@@ -94,8 +94,8 @@ class Filter
     /**
      * 使用特定的过滤器过滤一个变量
      * @param mixed $variable 待过滤的变量
-     * @param int $filter 指定过滤器 ID
-     * @param mixed $options 指定过滤器参数
+     * @param int   $filter   指定过滤器 ID
+     * @param mixed $options  指定过滤器参数
      * @return mixed
      */
     public static function var($variable, $filter = 516, $options = null)

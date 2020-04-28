@@ -21,8 +21,8 @@ class Password
     /**
      * 创建密码的散列
      * @param string $password 密码
-     * @param int $algo 指示算法的密码算法常量
-     * @param array $options 选项
+     * @param int    $algo     指示算法的密码算法常量
+     * @param array  $options  选项
      * @return string 失败时返回 false
      */
     public static function hash($password, $algo, $options = null)
@@ -32,9 +32,9 @@ class Password
 
     /**
      * 检测散列值是否匹配指定的选项
-     * @param string $hash 散列值
-     * @param int $algo 指示算法的密码算法常量
-     * @param array $options 选项
+     * @param string $hash    散列值
+     * @param int    $algo    指示算法的密码算法常量
+     * @param array  $options 选项
      * @return bool
      */
     public static function needsRehash($hash, $algo, $options = null)
@@ -45,7 +45,7 @@ class Password
     /**
      * 验证密码是否和散列值匹配
      * @param string $password 密码
-     * @param string $hash 散列值
+     * @param string $hash     散列值
      * @return bool
      */
     public static function verify($password, $hash)

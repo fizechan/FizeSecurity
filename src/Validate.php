@@ -1,11 +1,9 @@
 <?php
-/** @noinspection PhpComposerExtensionStubsInspection */
-
 
 namespace fize\security;
 
-use SplFileObject;
 use Exception;
+use SplFileObject;
 
 /**
  * 验证
@@ -29,8 +27,8 @@ class Validate
 
     /**
      * 正则验证
-     * @param mixed $value 字段值
-     * @param string $rule 正则规则
+     * @param mixed  $value 字段值
+     * @param string $rule  正则规则
      * @return bool
      */
     public static function regex($value, $rule)
@@ -43,8 +41,8 @@ class Validate
 
     /**
      * filter 验证
-     * @param mixed $value 值
-     * @param int $filter 验证器 ID
+     * @param mixed $value   值
+     * @param int   $filter  验证器 ID
      * @param mixed $options 其他参数
      * @return bool
      */
@@ -56,7 +54,7 @@ class Validate
     /**
      * 某个字段必须存在
      * @param string $name 键名
-     * @param array $sets 数组
+     * @param array  $sets 数组
      * @return bool
      */
     public static function isset($name, array $sets)
@@ -169,7 +167,7 @@ class Validate
 
     /**
      * 是否为有效的日期、时间
-     * @param mixed $value 值
+     * @param mixed  $value  值
      * @param string $format 指定格式化
      * @return bool
      */
@@ -327,8 +325,8 @@ class Validate
 
     /**
      * 是否为有效的域名或者 IP
-     * @param mixed $value 值
-     * @param string $rule 解析记录类型
+     * @param mixed  $value 值
+     * @param string $rule  解析记录类型
      * @return bool
      */
     public static function dnsrr($value, $rule = 'MX')
@@ -402,7 +400,7 @@ class Validate
     /**
      * 是否在指定数组内
      * @param mixed $value 值
-     * @param array $sets 数组
+     * @param array $sets  数组
      * @return bool
      */
     public static function in($value, array $sets)
@@ -413,7 +411,7 @@ class Validate
     /**
      * 是否不在指定数组内
      * @param mixed $value 值
-     * @param array $sets 数组
+     * @param array $sets  数组
      * @return bool
      */
     public static function notIn($value, array $sets)
@@ -425,8 +423,8 @@ class Validate
     /**
      * 是否在某个区间
      * @param mixed $value 值
-     * @param mixed $min 最小值
-     * @param mixed $max 最大值
+     * @param mixed $min   最小值
+     * @param mixed $max   最大值
      * @return bool
      */
     public static function between($value, $min, $max)
@@ -437,8 +435,8 @@ class Validate
     /**
      * 是否不在某个区间
      * @param mixed $value 值
-     * @param mixed $min 最小值
-     * @param mixed $max 最大值
+     * @param mixed $min   最小值
+     * @param mixed $max   最大值
      * @return bool
      */
     public static function notBetween($value, $min, $max)
@@ -450,8 +448,8 @@ class Validate
     /**
      * 验证数据长度
      * @param mixed $value 值
-     * @param int $min 最小长度
-     * @param int $max 最大长度，如果未设定该参数，则表示长度 = $min
+     * @param int   $min   最小长度
+     * @param int   $max   最大长度，如果未设定该参数，则表示长度 = $min
      * @return bool
      */
     public static function length($value, $min, $max = null)
@@ -474,7 +472,7 @@ class Validate
     /**
      * 值的最大长度
      * @param mixed $value 值
-     * @param int $max 最大长度
+     * @param int   $max   最大长度
      * @return bool
      */
     public static function maxLength($value, $max)
@@ -485,7 +483,7 @@ class Validate
     /**
      * 值的最小长度
      * @param mixed $value 值
-     * @param int $min 最小长度
+     * @param int   $min   最小长度
      * @return bool
      */
     public static function minLength($value, $min)
@@ -502,8 +500,8 @@ class Validate
 
     /**
      * 是否在某个日期之后
-     * @param mixed $value 值
-     * @param string $date 日期时间
+     * @param mixed  $value 值
+     * @param string $date  日期时间
      * @return bool
      */
     public static function after($value, $date)
@@ -513,8 +511,8 @@ class Validate
 
     /**
      * 是否在某个日期之前
-     * @param mixed $value 值
-     * @param string $date 日期时间
+     * @param mixed  $value 值
+     * @param string $date  日期时间
      * @return bool
      */
     public static function before($value, $date)
@@ -524,9 +522,9 @@ class Validate
 
     /**
      * 是否在某个有效日期之内
-     * @param mixed $value 值
+     * @param mixed  $value      值
      * @param string $date_begin 开始时间
-     * @param string $date_end 结束时间
+     * @param string $date_end   结束时间
      * @return bool
      */
     public static function expire($value, $date_begin, $date_end)
@@ -542,7 +540,7 @@ class Validate
      *   - 带 * 号通配符 IP 格式：192.*.*.1
      *   - IP 段组：192.168.5.1 - 192.168.10.101
      * @param string $ip
-     * @param array $networks 网段数组
+     * @param array  $networks 网段数组
      * @return bool
      * @todo 仅支持IPV4，IPV6暂未实现
      */
@@ -590,9 +588,9 @@ class Validate
 
     /**
      * 判断值是否和指定数组指定键名的值相同
-     * @param mixed $value 值
-     * @param string $name 指定键名
-     * @param array $array 指定数组
+     * @param mixed  $value 值
+     * @param string $name  指定键名
+     * @param array  $array 指定数组
      * @return bool
      */
     public static function confirm($value, $name, array $array)
@@ -602,9 +600,9 @@ class Validate
 
     /**
      * 判断值是否和指定数组指定键名的值不相同
-     * @param mixed $value 值
-     * @param string $name 指定键名
-     * @param array $array 指定数组
+     * @param mixed  $value 值
+     * @param string $name  指定键名
+     * @param array  $array 指定数组
      * @return bool
      */
     public static function different($value, $name, array $array)
@@ -614,9 +612,9 @@ class Validate
 
     /**
      * 判断值是否大于等于指定数组指定键名的值
-     * @param mixed $value 值
-     * @param array $array 指定数组
-     * @param string $name 指定键名
+     * @param mixed  $value 值
+     * @param array  $array 指定数组
+     * @param string $name  指定键名
      * @return bool
      */
     public static function fieldEgt($value, array $array, $name)
@@ -626,9 +624,9 @@ class Validate
 
     /**
      * 判断值是否大于指定数组指定键名的值
-     * @param mixed $value 值
-     * @param array $array 指定数组
-     * @param string $name 指定键名
+     * @param mixed  $value 值
+     * @param array  $array 指定数组
+     * @param string $name  指定键名
      * @return bool
      */
     public static function fieldGt($value, array $array, $name)
@@ -638,9 +636,9 @@ class Validate
 
     /**
      * 判断值是否小于等于指定数组指定键名的值
-     * @param mixed $value 值
-     * @param array $array 指定数组
-     * @param string $name 指定键名
+     * @param mixed  $value 值
+     * @param array  $array 指定数组
+     * @param string $name  指定键名
      * @return bool
      */
     public static function fieldElt($value, array $array, $name)
@@ -650,9 +648,9 @@ class Validate
 
     /**
      * 判断值是否小于指定数组指定键名的值
-     * @param mixed $value 值
-     * @param array $array 指定数组
-     * @param string $name 指定键名
+     * @param mixed  $value 值
+     * @param array  $array 指定数组
+     * @param string $name  指定键名
      * @return bool
      */
     public static function fieldLt($value, array $array, $name)
@@ -662,7 +660,7 @@ class Validate
 
     /**
      * 判断值是否等于预期值
-     * @param mixed $value 值
+     * @param mixed $value  值
      * @param mixed $expect 预期值
      * @return bool
      */
@@ -673,7 +671,7 @@ class Validate
 
     /**
      * 判断值是否不等于预期值
-     * @param mixed $value 值
+     * @param mixed $value  值
      * @param mixed $expect 预期值
      * @return bool
      */
@@ -684,7 +682,7 @@ class Validate
 
     /**
      * 判断值是否大于等于预期值
-     * @param mixed $value 值
+     * @param mixed $value  值
      * @param mixed $expect 预期值
      * @return bool
      */
@@ -695,7 +693,7 @@ class Validate
 
     /**
      * 判断值是否大于预期值
-     * @param mixed $value 值
+     * @param mixed $value  值
      * @param mixed $expect 预期值
      * @return bool
      */
@@ -706,7 +704,7 @@ class Validate
 
     /**
      * 判断值是否小于等于预期值
-     * @param mixed $value 值
+     * @param mixed $value  值
      * @param mixed $expect 预期值
      * @return bool
      */
@@ -717,7 +715,7 @@ class Validate
 
     /**
      * 判断值是否小于预期值
-     * @param mixed $value 值
+     * @param mixed $value  值
      * @param mixed $expect 预期值
      * @return bool
      */

@@ -1,5 +1,4 @@
 <?php
-/** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace fize\security;
 
@@ -85,8 +84,8 @@ class OpenSSL
 
     /**
      * 设置 CSR
-     * @param mixed $csr CSR 资源对象或者 CSR 字符串或者 CSR 文件的路径
-     * @param bool $is_file 指明参数$csr是否为文件路径
+     * @param mixed $csr     CSR 资源对象或者 CSR 字符串或者 CSR 文件的路径
+     * @param bool  $is_file 指明参数$csr是否为文件路径
      * @return bool
      */
     public function setCsr($csr, $is_file = true)
@@ -123,8 +122,8 @@ class OpenSSL
 
     /**
      * 设置公钥
-     * @param mixed $key 公钥字符串或则公钥文件的路径或者公钥资源对象
-     * @param bool $is_file 指明参数 $key 是否为文件路径
+     * @param mixed $key     公钥字符串或则公钥文件的路径或者公钥资源对象
+     * @param bool  $is_file 指明参数 $key 是否为文件路径
      * @return bool
      */
     public function setPublicKey($key, $is_file = true)
@@ -149,8 +148,8 @@ class OpenSSL
      *
      * 参数 `$passphrase` :
      *   如果指定的密钥已被加密了(受密码保护)，可选参数 passphrase 是必须要的
-     * @param mixed $key 私钥字符串或则私钥文件的路径或者密钥资源对象
-     * @param bool $is_file 指明参数 $key 是否为文件路径
+     * @param mixed  $key        私钥字符串或则私钥文件的路径或者密钥资源对象
+     * @param bool   $is_file    指明参数 $key 是否为文件路径
      * @param string $passphrase 密码
      * @return bool
      */
@@ -174,8 +173,8 @@ class OpenSSL
 
     /**
      * 设置X509证书
-     * @param mixed $x509 X509 证书资源对象或者证书字符串或则证书文件的路径
-     * @param bool $is_file 指明参数 $x509 是否为文件路径
+     * @param mixed $x509    X509 证书资源对象或者证书字符串或则证书文件的路径
+     * @param bool  $is_file 指明参数 $x509 是否为文件路径
      * @return bool
      */
     public function setX509($x509, $is_file = true)
@@ -232,7 +231,7 @@ class OpenSSL
     /**
      * 将 CSR 导出到文件
      * @param string $outfilename 输出文件的路径
-     * @param bool $notext 如果设为 FALSE，输出内容将包含附加的人类可读信息
+     * @param bool   $notext      如果设为 FALSE，输出内容将包含附加的人类可读信息
      * @return bool
      */
     public function csrExportToFile($outfilename, $notext = true)
@@ -242,8 +241,8 @@ class OpenSSL
 
     /**
      * 将 CSR 作为字符串导出
-     * @param string $out 在成功时，该字符串将包含 PEM 编码的 CSR 。
-     * @param bool $notext 如果设为 FALSE，输出内容将包含附加的人类可读信息
+     * @param string $out    在成功时，该字符串将包含 PEM 编码的 CSR 。
+     * @param bool   $notext 如果设为 FALSE，输出内容将包含附加的人类可读信息
      * @return bool
      */
     public function csrExport(&$out, $notext = true)
@@ -273,8 +272,8 @@ class OpenSSL
 
     /**
      * 生成一个 CSR
-     * @param array $dn 在证书中使用的专有名称或主题字段
-     * @param array $configargs 配置项
+     * @param array $dn           在证书中使用的专有名称或主题字段
+     * @param array $configargs   配置项
      * @param array $extraattribs 额外配置选项
      * @return resource 失败返回 false
      */
@@ -285,9 +284,9 @@ class OpenSSL
 
     /**
      * 用另一个证书签署 CSR (或者本身) 并且生成一个证书
-     * @param int $days 指定生成的证书在几天内有效的时间长度
+     * @param int   $days       指定生成的证书在几天内有效的时间长度
      * @param array $configargs 你可以通过 configargs 确定 CSR 签名
-     * @param int $serial 可选的发行证书编号
+     * @param int   $serial     可选的发行证书编号
      * @return resource
      */
     public function csrSign($days, array $configargs = null, $serial = 0)
@@ -302,12 +301,12 @@ class OpenSSL
      *   常量OPENSSL_RAW_DATA, OPENSSL_ZERO_PADDING中的一个。
      * 参数 `$tag` :
      *   如果是错误的，验证失败，函数返回 FALSE。
-     * @param string $data 将被解密的密文
-     * @param string $method 加密算法
-     * @param int $options 选项
-     * @param string $iv 非空的初始化向量
-     * @param string $tag AEAD 密码模式中的身份验证标签
-     * @param string $aad 额外的认证数据
+     * @param string $data    将被解密的密文
+     * @param string $method  加密算法
+     * @param int    $options 选项
+     * @param string $iv      非空的初始化向量
+     * @param string $tag     AEAD 密码模式中的身份验证标签
+     * @param string $aad     额外的认证数据
      * @return string 失败时返回 false
      */
     public function decrypt($data, $method, $options = 0, $iv = "", $tag = "", $aad = "")
@@ -335,9 +334,9 @@ class OpenSSL
      *
      * 参数 `$raw_output` :
      *   为 TRUE 时将会返回原始输出数据，否则返回值将会是 16 进制
-     * @param string $data 给定的数据
-     * @param string $method 要使用的摘要方法
-     * @param bool $raw_output 是否返回原始输出数据
+     * @param string $data       给定的数据
+     * @param string $method     要使用的摘要方法
+     * @param bool   $raw_output 是否返回原始输出数据
      * @return string
      */
     public static function digest($data, $method, $raw_output = false)
@@ -354,14 +353,14 @@ class OpenSSL
      *   使用AEAD密码模式（GCM 或 CCM）时传引用的验证标签。
      * 参数 `$tag_length` :
      *   GCM 模式时，它的范围是 4 到 16。
-     * @param string $data 待加密的明文信息数据
-     * @param string $method 密码学方式
-     * @param int $options 选项
-     * @param string $iv 非 NULL 的初始化向量
-     * @param bool $is_aead 是否使用使用 AEAD 密码模式
-     * @param string $tag 引用的验证标签
-     * @param string $aad 附加的验证数据
-     * @param int $tag_length 验证 tag 的长度
+     * @param string $data       待加密的明文信息数据
+     * @param string $method     密码学方式
+     * @param int    $options    选项
+     * @param string $iv         非 NULL 的初始化向量
+     * @param bool   $is_aead    是否使用使用 AEAD 密码模式
+     * @param string $tag        引用的验证标签
+     * @param string $aad        附加的验证数据
+     * @param int    $tag_length 验证 tag 的长度
      * @return string
      */
     public function encrypt($data, $method, $options = 0, $iv = "", $is_aead = false, &$tag = null, $aad = "", $tag_length = 16)
@@ -438,7 +437,7 @@ class OpenSSL
      *   格式字符串 “file://path/to/file.pem” 或者 PEM 格式的私钥
      * 参数 `$passphrase` :
      *   如果指定的密钥已被加密了(受密码保护)，可选参数 passphrase 是必须要的。
-     * @param mixed $key 私钥
+     * @param mixed  $key        私钥
      * @param string $passphrase 密码
      * @return resource 失败返回 false
      * @deprecated openssl_pkey_get_private() 的别名，不建议使用
@@ -465,10 +464,10 @@ class OpenSSL
     /**
      * 打开密封的数据
      * @param string $sealed_data 待解密数据
-     * @param string $open_data 在这个参数中返回打开的数据
-     * @param string $env_key 信封密钥
-     * @param string $method 加解密算法
-     * @param string $iv 初始化向量
+     * @param string $open_data   在这个参数中返回打开的数据
+     * @param string $env_key     信封密钥
+     * @param string $method      加解密算法
+     * @param string $iv          初始化向量
      * @return bool
      */
     public function open($sealed_data, &$open_data, $env_key, $method = "RC4", &$iv = null)
@@ -483,10 +482,10 @@ class OpenSSL
      *   PBKDF2 推荐一个不少于 64 位( 8 字节)的密码盐值。
      * 参数 `$iterations` :
      *   NIST 建议至少 10,000 次。
-     * @param string $password 派生密钥所生成的密码
-     * @param string $salt 盐值
-     * @param int $key_length 希望输出密钥的长度
-     * @param int $iterations 需要的迭代次数
+     * @param string $password         派生密钥所生成的密码
+     * @param string $salt             盐值
+     * @param int    $key_length       希望输出密钥的长度
+     * @param int    $iterations       需要的迭代次数
      * @param string $digest_algorithm 可选的散列或摘要算法
      * @return string 失败时返回 false
      */
@@ -498,8 +497,8 @@ class OpenSSL
     /**
      * 输出一个 PKCS#12 兼容的证书存储文件
      * @param string $filename 输出文件的路径
-     * @param string $pass 用于解锁 PKCS#12 文件的加密密码
-     * @param array $args 可选数组
+     * @param string $pass     用于解锁 PKCS#12 文件的加密密码
+     * @param array  $args     可选数组
      * @return bool
      */
     public function pkcs12ExportToFile($filename, $pass, array $args = null)
@@ -513,9 +512,9 @@ class OpenSSL
 
     /**
      * 将 PKCS#12 兼容证书存储文件导出到变量
-     * @param string $out 成功，该字符串将为 PKCS#12 格式
+     * @param string $out  成功，该字符串将为 PKCS#12 格式
      * @param string $pass 用于解锁 PKCS#12 文件的加密密码
-     * @param array $args 可选数组
+     * @param array  $args 可选数组
      * @return bool
      */
     public function pkcs12Export(&$out, $pass, array $args = null)
@@ -530,8 +529,8 @@ class OpenSSL
     /**
      * 将 PKCS#12 证书存储区解析到数组中
      * @param string $pkcs12 证书存储内容
-     * @param array $certs 成功，将保存证书存储数据
-     * @param string $pass 用来解锁 PKCS#12 文件的解密密码
+     * @param array  $certs  成功，将保存证书存储数据
+     * @param string $pass   用来解锁 PKCS#12 文件的解密密码
      * @return bool
      */
     public static function pkcs12Read($pkcs12, &$certs, $pass)
@@ -541,7 +540,7 @@ class OpenSSL
 
     /**
      * 解密一个 S/MIME 加密的消息
-     * @param string $infilename 加密信息文件路径
+     * @param string $infilename  加密信息文件路径
      * @param string $outfilename 解密的消息将被存入的文件名
      * @return bool
      */
@@ -557,12 +556,12 @@ class OpenSSL
      *   在被加密后将对数据进行预处理
      * 参数 `$recipcerts` :
      *   不指定则为当前证书
-     * @param string $infile 加密信息文件路径
-     * @param string $outfile 加密的消息将被存入的文件
-     * @param array $headers 包含头信息的数组
-     * @param mixed $recipcerts 一个 X.509 证书[或数组]
-     * @param int $flags 指定影响编码过程的选项
-     * @param int $cipherid 密码常量之一
+     * @param string $infile     加密信息文件路径
+     * @param string $outfile    加密的消息将被存入的文件
+     * @param array  $headers    包含头信息的数组
+     * @param mixed  $recipcerts 一个 X.509 证书[或数组]
+     * @param int    $flags      指定影响编码过程的选项
+     * @param int    $cipherid   密码常量之一
      * @return bool
      */
     public function pkcs7Encrypt($infile, $outfile, array $headers, $recipcerts = null, $flags = 0, $cipherid = 0)
@@ -576,7 +575,7 @@ class OpenSSL
     /**
      * 将 PKCS7 文件导出为 PEM 格式证书的数组
      * @param string $infilename PKCS7 文件路径
-     * @param array $certs 成功后 PEM 格式证书的数组
+     * @param array  $certs      成功后 PEM 格式证书的数组
      * @return bool
      */
     public static function pkcs7Read($infilename, array &$certs)
@@ -589,11 +588,11 @@ class OpenSSL
      *
      * 参数 `$extracerts` :
      *   其中包含一组含有签名的额外的证书
-     * @param string $infilename 你打算用来进行数字签名的输入文件
+     * @param string $infilename  你打算用来进行数字签名的输入文件
      * @param string $outfilename 将写入数字签名的文件
-     * @param array $headers 个包含头信息的数组
-     * @param int $flags 可以用来改变输出
-     * @param string $extracerts 指定一个文件的名称
+     * @param array  $headers     个包含头信息的数组
+     * @param int    $flags       可以用来改变输出
+     * @param string $extracerts  指定一个文件的名称
      * @return bool
      */
     public function pkcs7Sign($infilename, $outfilename, array $headers, $flags = 64, $extracerts = null)
@@ -612,12 +611,12 @@ class OpenSSL
      *   如果 extracerts 被指定了，该文件包含了一堆会被作为不受信任的 ca 使用的证书
      * 参数 `$content` :
      *   你可以使用 content 来指定带有已被验证数据的文件名，该文件内容已去掉了签名信息
-     * @param string $filename 消息文件的路径
-     * @param int $flags 可以用来影响如何校验签名
+     * @param string $filename    消息文件的路径
+     * @param int    $flags       可以用来影响如何校验签名
      * @param string $outfilename 指定输出文件
-     * @param array $cainfo 保存关于受信任的 CA 证书的信息
-     * @param string $extracerts 指定不受信任的 ca 使用的证书
-     * @param string $content 已被验证数据的文件名
+     * @param array  $cainfo      保存关于受信任的 CA 证书的信息
+     * @param string $extracerts  指定不受信任的 ca 使用的证书
+     * @param string $content     已被验证数据的文件名
      * @return bool 错误时返回1
      */
     public function pkcs7Verify($filename, $flags, $outfilename = null, array $cainfo = null, $extracerts = null, $content = null)
@@ -636,8 +635,8 @@ class OpenSSL
      * 参数 `$configargs` :
      *   用来调整导出流程，通过指定或者覆盖 openssl 配置文件选项
      * @param string $outfilename 输出文件的路径
-     * @param string $passphrase 密码
-     * @param array $configargs 配置文件选项
+     * @param string $passphrase  密码
+     * @param array  $configargs  配置文件选项
      * @return bool
      */
     public function pkeyExportToFile($outfilename, $passphrase = null, array $configargs = null)
@@ -653,9 +652,9 @@ class OpenSSL
      *
      * 参数 `$configargs` :
      *   用来调整导出流程，通过指定或者覆盖 openssl 配置文件选项
-     * @param string $out 成功时该变量取得字符串内容
+     * @param string $out        成功时该变量取得字符串内容
      * @param string $passphrase 密码
-     * @param array $configargs 配置文件选项
+     * @param array  $configargs 配置文件选项
      * @return bool
      */
     public function pkeyExport(&$out, $passphrase = null, array $configargs = null)
@@ -687,7 +686,7 @@ class OpenSSL
      *   格式字符串 “file://path/to/file.pem” 或者 PEM 格式的私钥
      * 参数 `$passphrase` :
      *   如果指定的密钥已被加密了(受密码保护)，可选参数 passphrase 是必须要的
-     * @param mixed $key 私钥
+     * @param mixed  $key        私钥
      * @param string $passphrase 密码
      * @return resource 失败返回 false
      */
@@ -703,9 +702,9 @@ class OpenSSL
      *   X.509 证书资源或者格式字符串 “file://path/to/file.pem” 或者 PEM 格式的公钥
      * 参数 `$passphrase` :
      *   如果指定的密钥已被加密了(受密码保护)，可选参数 passphrase 是必须要的
-     * @param mixed $certificate 证书或者公钥
-     * @param bool $from_private 指明 $certificate 是否为私钥
-     * @param string $passphrase 密码
+     * @param mixed  $certificate  证书或者公钥
+     * @param bool   $from_private 指明 $certificate 是否为私钥
+     * @param string $passphrase   密码
      * @return resource 失败返回 false
      */
     public static function pkeyGetPublic($certificate, $from_private = false, $passphrase = "")
@@ -733,8 +732,8 @@ class OpenSSL
 
     /**
      * 使用私钥解密数据
-     * @param string $data 待解密数据
-     * @param int $padding 常量之一
+     * @param string $data    待解密数据
+     * @param int    $padding 常量之一
      * @return string 返回解密结果
      */
     public function privateDecrypt($data, $padding = 1)
@@ -749,8 +748,8 @@ class OpenSSL
     /**
      * 使用私钥加密数据
      * @notice 只能加密短字符串，长字符串请使用 AES 加密
-     * @param string $data 待加密数据
-     * @param int $padding 常量之一
+     * @param string $data    待加密数据
+     * @param int    $padding 常量之一
      * @return string 返回加密结果
      */
     public function privateEncrypt($data, $padding = 1)
@@ -764,8 +763,8 @@ class OpenSSL
 
     /**
      * 使用公钥解密数据
-     * @param string $data 待解密数据
-     * @param int $padding 常量之一
+     * @param string $data    待解密数据
+     * @param int    $padding 常量之一
      * @return string 返回解密结果
      */
     public function publicDecrypt($data, $padding = 1)
@@ -780,8 +779,8 @@ class OpenSSL
     /**
      * 使用公钥加密数据
      * @notice 只能加密短字符串，长字符串请使用 AES 加密
-     * @param string $data 待加密数据
-     * @param int $padding 常量之一
+     * @param string $data    待加密数据
+     * @param int    $padding 常量之一
      * @return string 返回加密结果
      */
     public function publicEncrypt($data, $padding = 1)
@@ -798,7 +797,7 @@ class OpenSSL
      *
      * 参数 `$crypto_strong` :
      *   如果传递到该函数中，将会保存为一个 boolean 值来表明是否使用了"强加密"
-     * @param int $length 所需字节串的长度
+     * @param int  $length        所需字节串的长度
      * @param bool $crypto_strong 表明是否使用了"强加密"
      * @return string
      */
@@ -809,11 +808,11 @@ class OpenSSL
 
     /**
      * 密封 (加密) 数据
-     * @param string $data 要密封的数据
+     * @param string $data        要密封的数据
      * @param string $sealed_data 保存被密封后的数据
-     * @param array $env_keys 保存已被加密的密钥数组
-     * @param string $method 加密算法
-     * @param string $iv 初始化向量
+     * @param array  $env_keys    保存已被加密的密钥数组
+     * @param string $method      加密算法
+     * @param string $iv          初始化向量
      * @return int
      */
     public function seal($data, &$sealed_data, array &$env_keys, $method = 'RC4', $iv = '')
@@ -823,8 +822,8 @@ class OpenSSL
 
     /**
      * 对数据签名
-     * @param string $data 待签名数据
-     * @param int $signature_alg 签名参数
+     * @param string $data          待签名数据
+     * @param int    $signature_alg 签名参数
      * @return string 返回签名字符串
      */
     public function sign($data, $signature_alg = 1)
@@ -859,7 +858,7 @@ class OpenSSL
     /**
      * 生成一个新的签名公钥和挑战
      * @param string $challenge 与 SPKAC 有关的挑战
-     * @param int $algorithm 摘要算法
+     * @param int    $algorithm 摘要算法
      * @return string
      */
     public function spki_new(&$challenge, $algorithm = 0)
@@ -879,9 +878,9 @@ class OpenSSL
 
     /**
      * 验证签名
-     * @param string $data 用来生成签名的数据字符串
-     * @param string $signature 签名
-     * @param int $signature_alg 签名算法
+     * @param string $data          用来生成签名的数据字符串
+     * @param string $signature     签名
+     * @param int    $signature_alg 签名算法
      * @return bool 如果签名正确返回 true, 签名错误返回 false
      */
     public function verify($data, $signature, $signature_alg = 1)
@@ -907,8 +906,8 @@ class OpenSSL
      *
      * 参数 `$purpose` :
      *   常量 X509_PURPOSE_*
-     * @param int $purpose 目的
-     * @param array $cainfo 一个受信任的 CA 文件/文件夹组成的数组
+     * @param int    $purpose       目的
+     * @param array  $cainfo        一个受信任的 CA 文件/文件夹组成的数组
      * @param string $untrustedfile PEM 编码文件的名称
      * @return int
      */
@@ -920,7 +919,7 @@ class OpenSSL
     /**
      * 导出证书至文件
      * @param string $outfilename 输出文件的路径
-     * @param bool $notext 影响输出的冗余度
+     * @param bool   $notext      影响输出的冗余度
      * @return bool
      */
     public function x509ExportToFile($outfilename, $notext = true)
@@ -931,7 +930,7 @@ class OpenSSL
     /**
      * 以字符串格式导出证书
      * @param string $output 成功，将会存储 PEM
-     * @param bool $notext 影响输出的冗余度
+     * @param bool   $notext 影响输出的冗余度
      * @return bool
      */
     public function x509Export(&$output, $notext = true)
@@ -942,7 +941,7 @@ class OpenSSL
     /**
      * 计算一个给定的 x.509 证书的指纹或摘要
      * @param string $hash_algorithm 使用的摘要方法或散列算法
-     * @param bool $raw_output 是否输出原始二进制数据
+     * @param bool   $raw_output     是否输出原始二进制数据
      * @return string 失败返回 false
      */
     public function x509Fingerprint($hash_algorithm = 'sha1', $raw_output = false)

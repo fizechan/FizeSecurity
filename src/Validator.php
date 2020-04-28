@@ -1,6 +1,5 @@
 <?php
 
-
 namespace fize\security;
 
 use Closure;
@@ -167,7 +166,7 @@ class Validator
 
     /**
      * 添加验证器信息定义
-     * @param string $validate 验证器名称
+     * @param string $validate    验证器名称
      * @param string $description 信息描述
      */
     public function validate($validate, $description)
@@ -235,7 +234,7 @@ class Validator
     /**
      * 设置场景规则重定义
      * @param string $scene 场景
-     * @param array $rules 规则
+     * @param array  $rules 规则
      */
     public function sceneRules($scene, array $rules)
     {
@@ -245,7 +244,7 @@ class Validator
     /**
      * 设置场景字段命名重定义
      * @param string $scene 场景
-     * @param array $names 字段命名
+     * @param array  $names 字段命名
      */
     public function sceneNames($scene, array $names)
     {
@@ -254,8 +253,8 @@ class Validator
 
     /**
      * 设置场景信息重定义
-     * @param string $scene 场景
-     * @param array $messages 场景信息
+     * @param string $scene    场景
+     * @param array  $messages 场景信息
      */
     public function sceneMessages($scene, array $messages)
     {
@@ -265,7 +264,7 @@ class Validator
     /**
      * 设置场景待验证数据重定义
      * @param string $scene 场景
-     * @param array $data 待验证数据
+     * @param array  $data  待验证数据
      */
     public function sceneDatas($scene, array $data)
     {
@@ -281,7 +280,7 @@ class Validator
      */
     public function check(array $data = null)
     {
-        if(is_null($data)) {
+        if (is_null($data)) {
             if ($this->scene && isset($this->sceneDatas[$this->scene])) {
                 $data = $this->sceneDatas[$this->scene];
             } else {
@@ -289,12 +288,12 @@ class Validator
             }
         }
         $rules = $this->getFinalRules();
-        if(!$rules) {
+        if (!$rules) {
             return true;
         }
         $check = true;
         foreach (array_keys($data) as $field) {
-            if(isset($rules[$field])) {
+            if (isset($rules[$field])) {
                 $check = $check && $this->checkField($field, $rules[$field], $data);
                 if (!$check && $this->batch == false) {
                     return $this->errors[0];
@@ -332,8 +331,8 @@ class Validator
     /**
      * 验证单个字段规则
      * @param string $field 字段名
-     * @param array $rules 规则
-     * @param array $data 数据
+     * @param array  $rules 规则
+     * @param array  $data  数据
      * @return bool 成功返回 true，失败返回 false
      */
     protected function checkField($field, array $rules, array $data)
@@ -381,9 +380,9 @@ class Validator
 
     /**
      * 获取验证结果
-     * @param mixed $key 规则键名
-     * @param mixed $value 规则键值
-     * @param array $data 数据
+     * @param mixed  $key   规则键名
+     * @param mixed  $value 规则键值
+     * @param array  $data  数据
      * @param string $field 字段名
      * @return array
      */

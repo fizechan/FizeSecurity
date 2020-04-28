@@ -34,7 +34,7 @@ class Csrf
     }
 
     /**
-     * 验证表单 TOKEN
+     * 验证
      * @param string $token 待验证 TOKEN
      * @return bool
      */

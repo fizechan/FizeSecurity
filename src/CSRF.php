@@ -1,11 +1,11 @@
 <?php
 
-namespace fize\security;
+namespace Fize\Security;
 
 /**
  * 跨站请求伪造处理
  */
-class Csrf
+class CSRF
 {
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controller;
+namespace Tests;
 
-use fize\security\OpenSSL;
+use Fize\Crypt\Base64;
+use Fize\Security\OpenSSL;
 use PHPUnit\Framework\TestCase;
-use fize\crypt\Base64;
 
 class TestOpenSSL extends TestCase
 {

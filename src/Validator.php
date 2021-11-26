@@ -1,6 +1,6 @@
 <?php
 
-namespace fize\security;
+namespace Fize\Security;
 
 use Closure;
 use Exception;

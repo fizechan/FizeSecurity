@@ -1,10 +1,11 @@
 <?php
 
+namespace Tests;
 
-use fize\security\Validator;
+use Fize\Security\Validator;
 use PHPUnit\Framework\TestCase;
 
-class ValidatorTest extends TestCase
+class TestValidator extends TestCase
 {
 
     public function testCheck()

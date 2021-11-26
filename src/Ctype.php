@@ -1,6 +1,6 @@
 <?php
 
-namespace fize\security;
+namespace Fize\Security;
 
 /**
  * 字符类型检测

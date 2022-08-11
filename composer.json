@@ -27,10 +27,7 @@
     }
   },
   "require-dev": {
-    "ext-exif": "*",
-    "ext-mbstring": "*",
-    "ext-openssl": "*",
-    "fize/crypt": "^4.0.0",
+    "fize/codec": "^5.0.0",
     "phpunit/phpunit": "^9.5.0"
   }
 }

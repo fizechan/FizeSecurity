@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Fize\Crypt\Base64;
+use Fize\Codec\Base64;
 use Fize\Security\OpenSSL;
 use PHPUnit\Framework\TestCase;
 
